@@ -6,6 +6,9 @@
 # In each pass, we see the array and select the minimum. 
 # We swap that to the right position. 
 '''
+Elements: [11, 25, 12, 22, 64]
+Indexing:   0,  1,  2,  3,  4
+
 # Step-by-Step Process:
 
 Let's say we have:
@@ -31,6 +34,25 @@ def selection_sort(arr):
 unsorted_list = [64, 25, 12, 22, 11]
 sorted_list = selection_sort(unsorted_list)
 print("sorting list with selection sort: ", sorted_list)
+
+
+def selection_sort1(arr):
+    n = len(arr)
+    for i in range(n):
+        # Assume the first unsorted element is the minimum
+        min_index = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        
+        # Swap the found minimum element with the first unsorted element
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+    
+    return arr
+
+# Example
+nums = [64, 25, 12, 22, 11]
+print("Sorted:", selection_sort1(nums))
 
 
 
