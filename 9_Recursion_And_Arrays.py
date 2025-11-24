@@ -140,6 +140,33 @@ def UpdateAllIndicesOfAnElementInProvidedList(l1, x, index, ansList):
 ansList = []
 UpdateAllIndicesOfAnElementInProvidedList([3,2,5,2,8,2,1],2,0,ansList)
 
-
 # Update Indices in Global List. 
+ansList = []
+
+def UpdateAllIndicesOfAnElementInGlobalList(l1, x, index):
+    if (len(l1) == index):
+        return
+
+    if(l1[index] == x):
+        ansList.append(index)
+    
+    UpdateAllIndicesOfAnElementInGlobalList(l1, x, index+1)
+
+UpdateAllIndicesOfAnElementInGlobalList([3,2,5,2,8,2,1],2,0)
+
+# Return a List in an new array.
+def ReturnAllIndicesAsAList(l1, x, index):
+    if(len(l1) == index):
+        return []
+    
+    smallList = ReturnAllIndicesAsAList(l1, x, index+1)
+    
+    if(l1[index] == x):
+        smallList.insert(0, index)
+    
+    return smallList
+
+ansList = ReturnAllIndicesAsAList([3,2,5,2,8,2,1],2,0)
+print(ansList)
+
 
