@@ -15,11 +15,11 @@
 
 # stack Mainly used to optimized the problems.
 
-# Operations in Stack. 
+# Operations in Stack.
     1. Top/peek --> see the top element. 
     2. Pop --> removing the top element. 
     3. Push --> insert an element on top. 
-    4. size --> returns no. of elements in our stack. 
+    4. len --> returns no. of elements in our stack. 
     5. Empty --> if our stack is empty or not.
 '''
 
@@ -27,15 +27,15 @@
 
 class StackUsingList:
     def __init__(self):
-        self.stack = []
+        self.__stack = [] # Very Important to make it private so that functionality is right. 
 
     def push(self, data):
-        self.stack.append(data)
+        self.__stack.append(data)
         print(f"Pushed  {data} into stacked.")
         # print(f"Length of stack is: {len.stack()}")
 
-    def size(self):
-        return len(self.stack)
+    def len(self):
+        return len(self.__stack)
     
     def is_empty(self):
         '''
@@ -44,7 +44,7 @@ class StackUsingList:
         else:
             return False
         '''
-        return len(self.stack) == 0
+        return len(self.__stack) == 0
     
     def top(self):
         if(self.is_empty()):
@@ -53,7 +53,7 @@ class StackUsingList:
         
         # return self.stack[len(self.stack[-1])]
 
-        return self.stack[-1]
+        return self.__stack[-1]
 
     def pop(self): # Gettiing the top element and removing it as well from our stack. 
         if(self.is_empty()):
@@ -62,7 +62,7 @@ class StackUsingList:
         
         # return self.stack[len(self.stack[-1])]
 
-        return self.stack.pop()
+        return self.__stack.pop()
     
 myStack = StackUsingList()
 
@@ -77,11 +77,55 @@ print(myStack.is_empty())
 print(myStack.pop())
 print(myStack.pop())
 print(myStack.pop())
-print(myStack.size())
+print(myStack.len())
 print(myStack.top())
 
+# Stack Implementation: Using LinkedList. 
+class Node:
+    def __init__(self, data):
+        self.data = data 
+        self.next = None
+    
+class StackUsingLinkedList:
+    def __init__(self):
+        self.head = None
+        self.len = 0
 
+    def push(self, data):
+        newNode = Node(data)
+        self.len += 1 # Very Important to maintain len.
+        if(self.head == None):
+            self.head = newNode
+            return f"Added {data} to the stack"
+        
+        newNode.next = self.head
+        self.head = newNode
 
+        return f"Added {data} to the stack"
+
+    def top(self):
+        if(self.head is None or self.len == 0):
+            return "Stack is empty, no top element."
+        
+        return self.head.data
+    
+    def pop(self):
+        if(self.head is None or self.len == 0):
+            return "Stack is empty, cannot pop element"
+        
+        dataAtTop = self.head.data
+        self.head = self.head.next
+        self.len -= 1
+
+        return dataAtTop
+
+    def len(self):
+        return self.len
+
+    def is_empty(self):
+        return self.len == 0
+
+myStack = StackUsingLinkedList()
 
 
 
