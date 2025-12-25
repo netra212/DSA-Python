@@ -154,12 +154,12 @@ def insert_At_Tail_Recursively(head, data):
 # Insert a node at an Index. 
 def insert_Node_at_an_Index(head, data, index):
     '''
-    Docstring for insert_Node_at_an_Index
-    
-    1. Make a temp. 
-    2. move temp till index 1, using count var. 
-    3. update the connection to insert new node. 
-    4. Order is very important. 
+        Docstring for insert_Node_at_an_Index
+        
+        1. Make a temp. 
+        2. move temp till index 1, using count var. 
+        3. update the connection to insert new node. 
+        4. Order is very important. 
     '''
     temp = head
     newNode = Node(data)
@@ -172,6 +172,9 @@ def insert_Node_at_an_Index(head, data, index):
         temp = temp.next
         count += 1
 
+    if temp is None:
+        raise IndexError(f"Index {index} is out of bounds for the linked list")
+
     newNode.next = temp.next # preserving the previous connection so that overall connection does not get lost. 
 
     temp.next = newNode
@@ -179,7 +182,33 @@ def insert_Node_at_an_Index(head, data, index):
     return head
 
 # Insert at Index with Recursion. 
+def insert_node_at_an_index_recursively(head, data, index):
+    '''
+    Docstring for insert_node_at_an_index_recursively
+    
+    :param head: Description
+    :param data: Description
+    :param index: Description
 
+    Process:
+        1. Base case. 
+            if index == 0 insert at head... if head == None
+        2. Recursive call. 
+            head.next = insert(head.next, data, index-1)
+        3. Our works. 
+            return head. Whenever the head get changed then we have to return the head in LinkedList. 
+    '''
+    
+    if (index == 0):
+        return insert_At_Head_LL(head, data)
+    
+    if (head == None):
+        print("Index is out of bounds.")
+        return head
+    
+    head.next = insert_node_at_an_index_recursively(head.next, data, index-1)
+
+    return head
 
 
 
